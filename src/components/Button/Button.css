@@ -17,6 +17,12 @@
   position: relative;
   justify-content: flex-start;
   padding-left: 43px;
+  transition: filter 0.3s ease-in;
+}
+
+.Button:active,
+.Button:focus {
+  filter: brightness(120%);
 }
 
 .Button.function {

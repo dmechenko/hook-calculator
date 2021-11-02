@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Button from '../Button';
 import menu from '../../assets/menu.png';
+import commify from '../utils/commify';
 
 const App = () => {
   const [value, setValue] = useState('0');
   const [memory, setMemory] = useState(null);
   const [operator, setOperator] = useState(null);
   const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    setTime(new Date());
+  }, [new Date().getMinutes()]);
 
   const handlePress = (content) => () => {
     const num = parseFloat(value);
@@ -180,7 +185,7 @@ const App = () => {
           <img src={menu} alt='' />
         </div>
       </div>
-      <div className='display'>{value}</div>
+      <div className='display'>{commify(value)}</div>
       <div className='buttons'>
         <Button onButtonClick={handlePress} content='AC' type='function' />
         <Button onButtonClick={handlePress} content='±' type='function' />
@@ -202,7 +207,7 @@ const App = () => {
         <Button onButtonClick={handlePress} content='.' />
         <Button onButtonClick={handlePress} content='=' type='operator' />
       </div>
-      <div className='bottom'>-</div>
+      <div className='bottom'></div>
     </div>
   );
 };
